@@ -14,7 +14,6 @@ body {
   background-image: url('../../img/cover_back_logo.png');
   background-size: contain;
   background-repeat: no-repeat;
-  height: 105vh;
 }
 
 .login-container {
@@ -43,10 +42,6 @@ body {
   .login-container {
     transform: translateY(50vw);
   }
-
-  .login-bg {
-    height: 150vw;
-  }
 }
 
 @media (width >= 768px) {
@@ -63,10 +58,6 @@ body {
   button[type='submit'] {
     width: 200px;
     margin: 0 auto;
-  }
-
-  .login-bg {
-    height: 150vw;
   }
 
   form {
