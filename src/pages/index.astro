@@ -1,5 +1,7 @@
 ---
-
+import "bootstrap/dist/css/bootstrap.min.css";
+// import bootstrap from "../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+import NavigationBar from '../components/Navigation-Bar.astro'
 ---
 
 <html lang="en">
@@ -8,9 +10,12 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<script defer src=../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js></script>
+		
+    <title>eMercado - Todo lo que busques está aquí</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+
+		<NavigationBar />
 	</body>
 </html>
