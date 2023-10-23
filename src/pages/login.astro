@@ -5,10 +5,45 @@ import LoginCard from '../components/LoginCard/LoginCard.component.astro'
 import Footer from '../components/Footer/Footer.component.astro'
 ---
 
+<style>
+	body {
+		background-color: rgb(248, 249, 250);
+	}
+	
+	main {
+		height: 100dvh;
+
+		background-image: url('../img/cover_back_logo.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+
+	@media (width >= 768px) {
+		main {
+			width: 60dvw;
+			height: 87dvh;
+			
+			margin: 0 auto;
+		}
+	}
+
+	@media (width >= 1024px) {
+		main {
+			width: 100dvw;
+
+			background-image: url('../img/cover_back_without_personita.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+    }
+	}
+</style>
+
 <html lang="en">
 	<MainHead />
 	<body>
-    <LoginCard />
+		<main class="mt-5 mt-md-0 mt-lg-5">
+			<LoginCard />
+		</main>
     <Footer />
 	</body>
 </html>
