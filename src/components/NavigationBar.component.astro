@@ -2,13 +2,12 @@
 import "../css/bootstrap.min.css";
 ---
 <script>
-  
   class Greet extends HTMLElement {
     constructor() {
       super();
       
       const { email } = JSON.parse(localStorage.getItem('user'))
-      this.innerHTML = email
+      this.innerHTML = `Hola ${email}`
     }
   }
 
