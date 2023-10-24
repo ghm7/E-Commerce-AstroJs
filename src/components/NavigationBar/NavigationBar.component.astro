@@ -1,9 +1,20 @@
 ---
 import "../../css/bootstrap.min.css";
-
-const { email } = Astro.props;
-
 ---
+<script>
+  
+  class Greet extends HTMLElement {
+    constructor() {
+      super();
+      
+      const { email } = JSON.parse(localStorage.getItem('user'))
+      this.innerHTML = email
+    }
+  }
+
+  customElements.define('astro-greet', Greet)
+</script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
   <div class="container">
     <button
@@ -31,7 +42,8 @@ const { email } = Astro.props;
           <li class="nav-item d-flex">
             <div class="nav-link dropdown" id="loggeado">
               <button class="btn dropdown-toggle nav-btn" style="color: rgba(255,255,255,.55);" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Hola {email}
+                <!-- Hola {email} -->
+                <astro-greet />
               </button>
               <ul class="dropdown-menu user-dropdown ms-lg-3" aria-labelledby="dropdownMenuButton1">
                 <li><a id="cart" class="dropdown-item" href="#">Mi carrito</a></li>
