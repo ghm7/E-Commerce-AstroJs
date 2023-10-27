@@ -2,12 +2,6 @@
 const { title, description, imageURL, altImage, id } = Astro.props;
 ---
 
-<style>
-  astro-card {
-    cursor: pointer;
-  }
-</style>
-
 <a  
   class="card mb-4 shadow-sm custom-card"
   id={id}
@@ -24,3 +18,9 @@ const { title, description, imageURL, altImage, id } = Astro.props;
     </p>
   </div>
 </a>
+
+<style>
+  astro-card {
+    cursor: pointer;
+  }
+</style>

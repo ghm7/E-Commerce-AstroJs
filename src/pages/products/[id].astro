@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.component.astro';
 
 import { CATEGORIES_URL } from '../../js/constants/API.js'
 import getData from '../../js/services/getData.js'
+import GroupItems from '../../components/GroupItems.component.astro';
 
 const { id } = Astro.params;
 
@@ -19,6 +20,8 @@ export async function getStaticPaths() {
   });
 };
 
+const categories = await getData({ URL: CATEGORIES_URL });
+const [ currentPageCategory ] = categories.filter(category => category.name.toLowerCase() === id);
 ---
 
 <html lang="en">
@@ -120,7 +123,7 @@ export async function getStaticPaths() {
           </div>
 
           <!-- Card container -->
-          <div class="list-group container pt-2" id="containerProducts"></div>
+          <GroupItems id={ currentPageCategory.id } />
         </div>
       </div>
     </main>

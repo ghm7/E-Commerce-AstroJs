@@ -1,6 +1,6 @@
 const getData = async ({ URL, endpoint = null }) => {
   if (endpoint !== null) {
-    return fetch(`${URL}${endpoint}.json`)
+    return fetch(`${URL}/${endpoint}.json`)
       .then((response) => response.json())
       .then((data) => data);
   } else {

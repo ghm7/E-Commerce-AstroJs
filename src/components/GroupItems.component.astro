@@ -1,0 +1,24 @@
+---
+import Item from "./Item.component.astro";
+import getData from "../js/services/getData";
+import { PRODUCTS_URL } from '../js/constants/API.js'
+
+const { id } = Astro.props;
+
+const { products } = await getData({ URL: PRODUCTS_URL, endpoint: id});
+---
+<div class="list-group container pt-2">
+  {products.map(({ id, name, currency, cost, soldCount, description, image }) => {
+    image = '../'+image
+    return (<Item 
+      id={id},
+      name={name},
+      currency={currency},
+      cost={cost},
+      soldCount={soldCount},
+      description={description},
+      image={image}
+      />
+  );
+  })};
+</div>
