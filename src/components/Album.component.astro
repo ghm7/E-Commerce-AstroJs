@@ -7,31 +7,36 @@ const albumElements = [
     description: 'Los mejores precios en autos 0 kilómetro, de alta y media gama.',
     imageURL: 'img/cars_index.jpg',
     altImage: 'Imagen representativa de la categoría "Autos"',
+    id: 101,
   },
   {
     title: 'Juguetes',
     description: 'Encuentra aquí los mejores precios para niños/as de cualquier edad.',
     imageURL: 'img/toys_index.jpg',
-    altImage: 'Imagen representativa de la categoría "Juguetes"'
+    altImage: 'Imagen representativa de la categoría "Juguetes"',
+    id: 102,
   },
   {
     title: 'Muebles',
     description: 'Muebles antiguos, nuevos y para ser armados por uno mismo.',
     imageURL: 'img/furniture_index.jpg',
-    altImage: 'Imagen representativa de la categoría "Muebles"'
+    altImage: 'Imagen representativa de la categoría "Muebles"',
+    id: 103,
   },
 ]
 ---
+
 <div class="album py-5 bg-light" id="album">
   <div class="container">
     <div class="row">
-      {albumElements.map(({ title, description, imageURL, altImage }) => {
+      {albumElements.map(({ title, description, imageURL, altImage, id }) => {
       return (<div class="col-md-4">
                 <Card 
                   title={title} 
                   description={description}
                   imageURL={imageURL}
-                  altImage={altImage} />
+                  altImage={altImage}
+                  id={id} />
               </div>)
       })}
     </div>
