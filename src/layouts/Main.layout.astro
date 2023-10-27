@@ -1,0 +1,13 @@
+---
+import MainHead from '../components/MainHead.component.astro'
+import NavigationBar from '../components/NavigationBar.component.astro'
+import Footer from '../components/Footer.component.astro'
+---
+<html lang="en">
+	<MainHead />
+	<body>
+		<NavigationBar />
+    <slot />
+    <Footer />
+	</body>
+</html>

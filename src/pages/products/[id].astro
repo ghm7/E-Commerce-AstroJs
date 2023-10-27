@@ -1,12 +1,13 @@
 ---
-import MainHead from '../../components/MainHead.component.astro';
-import NavigationBar from '../../components/NavigationBar.component.astro';
-import SearchBar from '../../components/SearchBar.component.astro'
-import Footer from '../../components/Footer.component.astro';
-
-import { CATEGORIES_URL } from '../../js/constants/API.js'
-import getData from '../../js/services/getData.js'
+import Layout from '../../layouts/Main.layout.astro';
+import Header from '../../components/Header.component.astro';
+import SearchBar from '../../components/SearchBar.component.astro';
+import SortButtons from '../../components/SortButtons.component.astro';
+import PriceSearchBar from '../../components/PriceSearchBar.component.astro';
 import GroupItems from '../../components/GroupItems.component.astro';
+
+import { CATEGORIES_URL } from '../../js/constants/API.js';
+import getData from '../../js/services/getData.js';
 
 const { id } = Astro.params;
 
@@ -24,110 +25,28 @@ const categories = await getData({ URL: CATEGORIES_URL });
 const [ currentPageCategory ] = categories.filter(category => category.name.toLowerCase() === id);
 ---
 
-<html lang="en">
-  <MainHead />
-  <body>
-    <NavigationBar />
-    <main class="pb-5 container">
-      <div class="pt-5">
-        <div class="text-center">
-          <h1>Productos</h1>
-          <p>
-            Verás aquí todos los productos de la categoría
-            <strong id="cat-name"></strong>
-          </p>
+<Layout>
+  <main class="pb-5 pt-5 container">
+    <Header 
+      title="Productos" 
+      elementType={currentPageCategory.name} />
+
+    <div class="container">
+      <div class="row m-0">
+        <div class="col text-end">
+          <SortButtons />
         </div>
-
-        <div class="container">
-          <div class="row m-0">
-            <!-- Sort buttons -->
-            <div class="col text-end">
-              <div
-                class="btn-group btn-group-toggle mb-4"
-                data-bs-toggle="buttons"
-              >
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortAsc"
-                />
-
-                <label class="btn btn-light" for="sortAsc"
-                  ><i class="fa-solid fa-arrow-up-1-9"></i
-                ></label>
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortDesc"
-                />
-                <label class="btn btn-light" for="sortDesc"
-                  ><i class="fa-solid fa-arrow-down-9-1"></i
-                ></label>
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortByCount"
-                  checked
-                />
-                <label class="btn btn-light" for="sortByCount"
-                  ><i class="fas fa-sort-amount-down mr-1"></i
-                ></label>
-              </div>
-            </div>
-
-            <!-- Filter controls -->
-            <div class="row container p-0 m-0 gap-3">
-              <div class="row col-lg">
-                <SearchBar />
-              </div>
-
-              <!-- Price search field -->
-              <div class="col row">
-                <div class="col pe-1">
-                  <p class="font-weight-normal text-end my-2">Precio</p>
-                </div>
-                <div class="col p-0">
-                  <input
-                    class="form-control"
-                    type="number"
-                    placeholder="min."
-                    id="rangeFilterCountMin"
-                  />
-                </div>
-                <div class="col p-0">
-                  <input
-                    class="form-control"
-                    type="number"
-                    placeholder="máx."
-                    id="rangeFilterCountMax"
-                  />
-                </div>
-                <div class="col p-0">
-                  <div class="btn-group" role="group">
-                    <button
-                      class="btn btn-light btn-block"
-                      id="rangeFilterCount"
-                    >
-                      Filtrar
-                    </button>
-                    <button class="btn btn-light btn-sm" id="clearRangeFilter">
-                      Limpiar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="row container p-0 m-0 gap-3">
+          <div class="row col-lg">
+            <SearchBar />
           </div>
-
-          <!-- Card container -->
-          <GroupItems id={ currentPageCategory.id } />
+          <div class="col row">
+            <PriceSearchBar />
+          </div>
         </div>
       </div>
-    </main>
-
-    <Footer />
-  </body>
-</html>
+      
+      <GroupItems id={ currentPageCategory.id } />
+    </div>
+  </main>
+</Layout>

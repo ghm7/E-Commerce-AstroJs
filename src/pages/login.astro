@@ -1,9 +1,17 @@
 ---
 import '../css/bootstrap.min.css'
+import Layout from '../layouts/Main.layout.astro'
 import MainHead from '../components/MainHead.component.astro';
 import LoginCard from '../components/LoginCard.component.astro'
 import Footer from '../components/Footer.component.astro'
 ---
+
+<Layout>
+	<main class="mt-5 mt-md-0 mt-lg-5">
+		<LoginCard />
+		<script src="../js/login.js"></script>
+	</main>
+</Layout>
 
 <style>
 	body {
@@ -37,15 +45,3 @@ import Footer from '../components/Footer.component.astro'
     }
 	}
 </style>
-
-<html lang="en">
-	<MainHead />
-	<script src="../js/login.js"></script>
-	
-	<body>
-		<main class="mt-5 mt-md-0 mt-lg-5">
-			<LoginCard />
-		</main>
-    <Footer />
-	</body>
-</html>
