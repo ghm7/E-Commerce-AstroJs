@@ -26,27 +26,26 @@ const [ currentPageCategory ] = categories.filter(category => category.name.toLo
 ---
 
 <Layout>
-  <main class="pb-5 pt-5 container">
-    <Header 
-      title="Productos" 
-      elementType={currentPageCategory.name} />
+  <Header 
+    title="Productos" 
+    content="Verás aquí todos los productos de la categoría "
+    elementType={currentPageCategory.name} />
 
-    <div class="container">
-      <div class="row m-0">
-        <div class="col text-end">
-          <SortButtons />
+  <div class="container">
+    <div class="row m-0">
+      <div class="col text-end">
+        <SortButtons />
+      </div>
+      <div class="row container p-0 m-0 gap-3">
+        <div class="row col-lg">
+          <SearchBar />
         </div>
-        <div class="row container p-0 m-0 gap-3">
-          <div class="row col-lg">
-            <SearchBar />
-          </div>
-          <div class="col row">
-            <PriceSearchBar />
-          </div>
+        <div class="col row">
+          <PriceSearchBar />
         </div>
       </div>
-      
-      <GroupItems id={ currentPageCategory.id } />
     </div>
-  </main>
+    
+    <GroupItems id={ currentPageCategory.id } />
+  </div>
 </Layout>

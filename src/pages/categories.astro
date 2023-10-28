@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Main.layout.astro'
+import Header from '../components/Header.component.astro';
 import SortButtons from '../components/SortButtons.component.astro';
 import SearchBar from '../components/SearchBar.component.astro';
 import PriceSearchBar from '../components/PriceSearchBar.component.astro';
@@ -12,7 +13,11 @@ const categories = await getData({ URL: CATEGORIES_URL });
 ---
 
 <Layout>
-  <main class="pb-5 pt-5 container">
+  <Header 
+    title="Categorías"
+    content="Verás aquí todas las categorías del sitio." />
+
+  <main class="pb-5 container">
     <div class="container">
       <div class="row m-0">
         <div class="col text-end">
