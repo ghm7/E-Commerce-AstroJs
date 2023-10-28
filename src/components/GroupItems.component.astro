@@ -1,14 +1,20 @@
 ---
 import Item from "./Item.component.astro";
 import getData from "../js/services/getData";
-import { PRODUCTS_URL } from '../js/constants/API.js'
+import { PRODUCTS_URL, CATEGORIES_URL } from '../js/constants/API.js';
 
-const { id } = Astro.props;
+const { id } = Astro.props; 
 
-const { products } = await getData({ URL: PRODUCTS_URL, endpoint: id});
+const data = id  !== undefined 
+? await getData({ URL: PRODUCTS_URL, endpoint: id}) 
+: await getData({ URL: CATEGORIES_URL });
+
+const { products } = data ?? data;
 ---
+
 <div class="list-group container pt-2">
-  {products.map(({ id, name, currency, cost, soldCount, description, image }) => {
+  { products !== undefined 
+  ? products.map(({ id, name, currency, cost, soldCount, description, image }) => {
     image = '../'+image
     return (<Item 
       id={id},
@@ -17,8 +23,16 @@ const { products } = await getData({ URL: PRODUCTS_URL, endpoint: id});
       cost={cost},
       soldCount={soldCount},
       description={description},
-      image={image}
-      />
-  );
+      image={image} />
+    );
+  })
+  : data.map(({ id, name, description, productCount, imgSrc }) => {
+    return (<Item
+      id={id},
+      name={name},
+      description={description},
+      soldCount={productCount},
+      image={imgSrc} />
+      );
   })};
 </div>

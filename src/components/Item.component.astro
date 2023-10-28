@@ -12,8 +12,11 @@ const { id, name, currency, cost, soldCount, description, image } = Astro.props;
     </div>
     <div class="col">
       <div class="d-flex w-100 justify-content-between">
-        <h4 class="mb-1 category-title">{name} <span class="d-none d-lg-inline"> - </span> <br class="d-lg-none" /> 
-        <span class="text-secondary small-price">{currency + " " + cost}</span> </h4>
+        <h4 class="mb-1 category-title">{name} {currency || cost === undefined 
+        ? ''
+        : <span class="d-none d-lg-inline"> - </span> <br class="d-lg-none" /> 
+          <span class="text-secondary small-price">{currency + " " + cost}</span> 
+        } </h4>
         <small class="text-muted">{soldCount} vendidos</small>
       </div>
       <p class="mb-1 d-none d-md-inline">{description}</p>
