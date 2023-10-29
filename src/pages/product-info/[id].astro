@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from '../../layouts/Main.layout.astro'
+
+import getData from '../../js/services/getData.js'
+import { PRODUCTS_URL } from '../../js/constants/API.js'
+
+const { id } = Astro.params;
+
+export const getStaticPaths = ( async () => {
+  const products = await getData({ URL: PRODUCTS_URL, endpoint: "101" })
+  console.log(products)  
+
+  return [{
+    params: {id: '50921'}
+  }];
+}) satisfies GetStaticPaths;
+---
+
+<Layout>
+
+</Layout>

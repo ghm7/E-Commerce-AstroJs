@@ -7,7 +7,7 @@ const { id } = Astro.props;
 
 const data = id  !== undefined 
 ? await getData({ URL: PRODUCTS_URL, endpoint: id}) 
-: await getData({ URL: CATEGORIES_URL });
+: await getData({ URL: CATEGORIES_URL, endpoint: undefined });
 
 const { products } = data ?? data;
 ---
@@ -17,22 +17,24 @@ const { products } = data ?? data;
   ? products.map(({ id, name, currency, cost, soldCount, description, image }) => {
     image = '../'+image
     return (<Item 
-      id={id},
-      name={name},
-      currency={currency},
-      cost={cost},
-      soldCount={soldCount},
-      description={description},
-      image={image} />
+      id={id}
+      name={name}
+      currency={currency}
+      cost={cost}
+      soldCount={soldCount}
+      description={description}
+      image={image}
+      cardType="product" />
     );
   })
   : data.map(({ id, name, description, productCount, imgSrc }) => {
     return (<Item
-      id={id},
-      name={name},
-      description={description},
-      soldCount={productCount},
-      image={imgSrc} />
+      id={id}
+      name={name}
+      description={description}
+      soldCount={productCount}
+      image={imgSrc}
+      cardType="category" />
       );
   })};
 </div>

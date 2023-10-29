@@ -1,11 +1,11 @@
 ---
-const { id, name, currency, cost, soldCount, description, image } = Astro.props;
+const { id, name, currency, cost, soldCount, description, image, cardType } = Astro.props;
 ---
 
 <a 
   class="list-group-item list-group-item-action cursor-active"
   id={id}
-  href="/product-info.html">
+  href={ cardType === 'product' ? `/product-info/${id}.html` : `/products/${name.toLowerCase()}.html` }>
   <div class="row d-flex flex-column flex-md-row">
     <div class="col col-md-3">
       <img src={image} alt={description} class="img-thumbnail">

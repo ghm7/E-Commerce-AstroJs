@@ -9,7 +9,7 @@ import { CATEGORIES_URL } from '../js/constants/API.js';
 
 import getData from '../js/services/getData.js';
 
-const categories = await getData({ URL: CATEGORIES_URL });
+const categories = await getData({ URL: CATEGORIES_URL, endpoint: undefined });
 ---
 
 <Layout>
