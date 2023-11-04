@@ -1,0 +1,44 @@
+---
+const { comments } = Astro.props;
+---
+
+<div class="container pt-5">
+  <h4 class="mb-4">Comentarios</h4>
+    { comments.map(({ score, description, user, dateTime }) => {
+      return (
+        <p><b>{user}</b> - {dateTime} - <span></span></p>
+        <p>{description}</p>
+        <hr>
+      )
+    }) }
+</div>
+<div class="container pt-2">
+  <form id="form-save-comment">
+    <h4>Comentar</h4>
+    <label class="form-label" for="comment-area">Tu opinión:</label>
+    <br />
+    <textarea rows="3" id="comment-area" class="form-control"></textarea>
+    <br />
+    <div class="mr-5">
+      <label class="form-label" for="punctuation">Tu puntuación:</label
+      ><br />
+      <select class="form-select" id="punctuation">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+
+    <div class="pt-3">
+      <button
+        type="submit"
+        id="btn-add-comment"
+        class="btn btn-primary"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,29 +1,51 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from '../../layouts/Main.layout.astro'
+import Layout from '../../layouts/Main.layout.astro';
+import ProductInfoDescription from '../../components/ProductInfoDescription.component.astro';
+import Carousel from '../../components/Carousel.component.astro';
+import Comments from '../../components/Comments.component.astro';
 
-import getData from '../../js/services/getData.js'
-import { CATEGORIES_URL, PRODUCTS_URL } from '../../js/constants/API.js'
+import getData from '../../js/services/getData.js';
+import { CATEGORIES_URL, PRODUCT_INFO_URL, PRODUCT_INFO_COMMENTS_URL } from '../../js/constants/API.js';
 
 const { id } = Astro.params;
 
+const productInfo = await getData({ URL: PRODUCT_INFO_URL, endpoint: id });
+const { name, currency, cost, description, category, soldCount, images } = productInfo;
+const costWithCurrency = `${currency} ${cost}`;
+
+const comments = await getData({ URL: PRODUCT_INFO_COMMENTS_URL, endpoint: id });
+
 export const getStaticPaths = (async () => {
-  const categories = await getData( { URL: CATEGORIES_URL, endpoint: undefined });
-  
-  const allProducts = await Promise.all(categories.map( async ({ id }) => {
-    const { products } = await getData({ URL: PRODUCTS_URL, endpoint: id.toString() });
+  const products = await getData({ URL: CATEGORIES_URL, endpoint: 'ALL' });
 
-  return products;
-  }));
-
-  const filtered = allProducts.filter(product => product.length !== 0).flat(Infinity);
-
-  return filtered.map(({ id }) => ({ params: { id: id }}));
+  return products.map(({ id }) => ({ params: { id: id }}));
 }) satisfies GetStaticPaths;
 ---
 
 <Layout>
-  
-  <h1>{id}</h1>
+  <div class="container d-flex flex-column align-items-center">
+    <div
+      class="row d-flex flex-column justify-content-center w-100 flex-md-row"
+    >
+      <Carousel images={images} />
+      <ProductInfoDescription
+        name={name}
+        cost={costWithCurrency}
+        description={description}
+        category={category}
+        soldCount={soldCount}
+      />  
+    </div>
 
+    <Comments comments={comments} />
+    
+    <div class="container mt-5">
+      <h4>Productos relacionados</h4>
+      <div
+        class="pt-2 justify-content-center d-md-flex justify-content-md-start"
+        id="related-container"
+      ></div>
+    </div>
+  </div>
 </Layout>

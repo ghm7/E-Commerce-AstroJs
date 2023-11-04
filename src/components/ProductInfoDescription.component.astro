@@ -1,0 +1,20 @@
+---
+const { name, cost, description, category, soldCount} = Astro.props;
+---
+
+<div class="container col col-md-5">
+  <div class="container pt-5">
+    <h1 class="pb-4">{name}</h1>
+    <hr>
+    <p class="fw-bold">Precio</p>
+    <p class="fw-light">{cost}</p>
+    <p class="fw-bold">Descripción</p>
+    <p class="fw-light">{description}</p>
+    <p class="fw-bold">Categoría</p>
+    <p class="fw-light">{category}</p>
+    <p class="fw-bold">Cantidades vendidas</p>
+    <p class="fw-light">{soldCount}</p>
+    <button class="btn btn-primary" id="buy-btn">Comprar</button>
+  </div>
+</div>
+
