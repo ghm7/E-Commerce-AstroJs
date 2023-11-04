@@ -12,16 +12,12 @@ import getData from '../../js/services/getData.js';
 const { id } = Astro.params;
 
 export async function getStaticPaths() {
-  const categories = await getData({ URL: CATEGORIES_URL });
+  const categories = await getData({ URL: CATEGORIES_URL, endpoint: undefined });
 
-  return categories.map(({ name }) => {
-    return {
-      params: { id: name.toLowerCase() }
-    }
-  });
+  return categories.map(({ name }) => ({ params: { id: name.toLowerCase() } }));
 };
 
-const categories = await getData({ URL: CATEGORIES_URL });
+const categories = await getData({ URL: CATEGORIES_URL, endpoint: undefined });
 const [ currentPageCategory ] = categories.filter(category => category.name.toLowerCase() === id);
 ---
 

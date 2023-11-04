@@ -3,20 +3,27 @@ import type { GetStaticPaths } from "astro";
 import Layout from '../../layouts/Main.layout.astro'
 
 import getData from '../../js/services/getData.js'
-import { PRODUCTS_URL } from '../../js/constants/API.js'
+import { CATEGORIES_URL, PRODUCTS_URL } from '../../js/constants/API.js'
 
 const { id } = Astro.params;
 
-export const getStaticPaths = ( async () => {
-  const products = await getData({ URL: PRODUCTS_URL, endpoint: "101" })
-  console.log(products)  
+export const getStaticPaths = (async () => {
+  const categories = await getData( { URL: CATEGORIES_URL, endpoint: undefined });
+  
+  const allProducts = await Promise.all(categories.map( async ({ id }) => {
+    const { products } = await getData({ URL: PRODUCTS_URL, endpoint: id.toString() });
 
-  return [{
-    params: {id: '50921'}
-  }];
+  return products;
+  }));
+
+  const filtered = allProducts.filter(product => product.length !== 0).flat(Infinity);
+
+  return filtered.map(({ id }) => ({ params: { id: id }}));
 }) satisfies GetStaticPaths;
 ---
 
 <Layout>
+  
+  <h1>{id}</h1>
 
 </Layout>

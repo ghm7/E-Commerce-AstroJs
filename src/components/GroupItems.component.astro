@@ -16,6 +16,7 @@ const { products } = data ?? data;
   { products !== undefined 
   ? products.map(({ id, name, currency, cost, soldCount, description, image }) => {
     image = '../'+image
+
     return (<Item 
       id={id}
       name={name}
@@ -28,6 +29,7 @@ const { products } = data ?? data;
     );
   })
   : data.map(({ id, name, description, productCount, imgSrc }) => {
+
     return (<Item
       id={id}
       name={name}
