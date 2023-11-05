@@ -24,11 +24,14 @@ const showStars = (score) => {
   <h4 class="mb-4">Comentarios</h4>
     { comments.map(({ score, description, user, dateTime }) => {
       return (
-        <p><b>{user}</b> - {dateTime} - <span>{ showStars(score).map((star, index) => {
-          return index < score 
-            ? <img src="/icons/star-fill.svg" /> 
-            : <img src="/icons/star.svg" />
-        })}</span></p>
+        <p><b>{user}</b> - {dateTime} - 
+          <span>{ showStars(score).map((star, index) => {
+            return index < score 
+              ? <img src="/icons/star-fill.svg" /> 
+              : <img src="/icons/star.svg" />
+            })}
+          </span>
+        </p>
         <p>{description}</p>
         <hr>
       )

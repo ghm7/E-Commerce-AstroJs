@@ -4,6 +4,7 @@ import Layout from '../../layouts/Main.layout.astro';
 import ProductInfoDescription from '../../components/ProductInfoDescription.component.astro';
 import Carousel from '../../components/Carousel.component.astro';
 import Comments from '../../components/Comments.component.astro';
+import RelatedProducts from "../../components/RelatedProducts.component.astro";
 
 import getData from '../../js/services/getData.js';
 import { CATEGORIES_URL, PRODUCT_INFO_URL, PRODUCT_INFO_COMMENTS_URL } from '../../js/constants/API.js';
@@ -40,12 +41,7 @@ export const getStaticPaths = (async () => {
 
     <Comments comments={comments} />
     
-    <div class="container mt-5">
-      <h4>Productos relacionados</h4>
-      <div
-        class="pt-2 justify-content-center d-md-flex justify-content-md-start"
-        id="related-container"
-      ></div>
-    </div>
+    <RelatedProducts /> 
+    
   </div>
 </Layout>
