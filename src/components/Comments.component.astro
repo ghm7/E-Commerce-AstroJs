@@ -1,12 +1,34 @@
 ---
 const { comments } = Astro.props;
+
+// console.log(comments)
+
+const showStars = (score) => {
+  const arr = [];
+  let i = 0;
+
+  for (let i = 0; i < Number(score); i++) {
+    arr.push('<img src="icons/star-fill.svg" />');
+  }
+
+  for (let i = 0; i < 5 - (Number(score)); i++) {
+    arr.push('<img src="icons/star.svg" />');
+  }
+
+  return arr;
+};
+
 ---
 
 <div class="container pt-5">
   <h4 class="mb-4">Comentarios</h4>
     { comments.map(({ score, description, user, dateTime }) => {
       return (
-        <p><b>{user}</b> - {dateTime} - <span></span></p>
+        <p><b>{user}</b> - {dateTime} - <span>{ showStars(score).map((star, index) => {
+          return index < score 
+            ? <img src="/icons/star-fill.svg" /> 
+            : <img src="/icons/star.svg" />
+        })}</span></p>
         <p>{description}</p>
         <hr>
       )
